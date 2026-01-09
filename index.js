@@ -12,3 +12,21 @@
 // Hint: Use .then() to process the response and convert it to JSON
 // Hint: Call the displayAstronauts() function with the fetched data
 // Hint: Use .catch() to handle any errors that occur during the fetch process
+
+function displayAstronauts(data) {
+	const ul = document.getElementById("astronaut-list");
+
+	data.people.forEach((person) => {
+		const li = document.createElement("li");
+		li.textContent = person.name;
+		ul.appendChild(li);
+	});
+}
+
+fetch("http://api.open-notify.org/astros.json")
+	.then((response) => response.json())
+	.then((data) => {
+		console.log(data);
+		displayAstronauts(data);
+	})
+	.catch((error) => console.log("Error! " + error));
